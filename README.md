@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # VisuaLens - Visual Question Answering System
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
@@ -388,3 +389,7 @@ If you encounter issues:
 ---
 
 **Enjoy exploring your images with AI-powered visual intelligence!**
+=======
+# VisuaLens
+Multimodal LLM System
+>>>>>>> 2362c320aa73a3a128813a7eda869bcc794c8d50
