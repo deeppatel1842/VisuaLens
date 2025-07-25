@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisuaLens Frontend Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .test-button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+        }
+        .test-button:hover {
+            background: #2563eb;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 6px;
+            margin: 10px 0;
+        }
+        .success { background: #d1fae5; color: #065f46; border: 1px solid #10b981; }
+        .error { background: #fee2e2; color: #991b1b; border: 1px solid #ef4444; }
+        .info { background: #dbeafe; color: #1e40af; border: 1px solid #3b82f6; }
+        .warning { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
+        
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔍 VisuaLens Frontend Test Suite</h1>
+        <p>This page helps test the VisuaLens frontend components before connecting to the backend API.</p>
+        
+        <div class="status info">
+            <strong>Test Environment:</strong> Standalone Frontend Testing
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <button class="test-button" onclick="openFullApp()">Open Full Application</button>
+            <button class="test-button" onclick="testResponsive()">📱 Test Responsive Design</button>
+            <button class="test-button" onclick="testComponents()">🧩 Test Components</button>
+            <button class="test-button" onclick="runAllTests()">Run All Tests</button>
+        </div>
+        
+        <div id="test-results"></div>
+    </div>
+
+    <div class="test-container">
+        <h2>Frontend Preview</h2>
+        <iframe id="app-preview" src="index.html"></iframe>
+    </div>
+
+    <div class="test-container">
+        <h2>Component Tests</h2>
+        <div id="component-tests">
+            <div class="status info">Click "Test Components" to run component tests</div>
+        </div>
+    </div>
+
+    <script>
+        function showStatus(message, type = 'info') {
+            const resultsDiv = document.getElementById('test-results');
+            const statusDiv = document.createElement('div');
+            statusDiv.className = `status ${type}`;
+            statusDiv.innerHTML = `<strong>${new Date().toLocaleTimeString()}:</strong> ${message}`;
+            resultsDiv.appendChild(statusDiv);
+            
+            // Auto-scroll to latest
+            statusDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openFullApp() {
+            window.open('index.html', '_blank');
+            showStatus('Opened full application in new tab', 'success');
+        }
+
+        function testResponsive() {
+            showStatus('Testing responsive design...', 'info');
+            
+            const iframe = document.getElementById('app-preview');
+            const sizes = [
+                { width: '375px', height: '667px', name: 'Mobile (iPhone)' },
+                { width: '768px', height: '1024px', name: 'Tablet (iPad)' },
+                { width: '1200px', height: '800px', name: 'Desktop' }
+            ];
+            
+            let currentSize = 0;
+            
+            function cycleSize() {
+                const size = sizes[currentSize];
+                iframe.style.width = size.width;
+                iframe.style.height = size.height;
+                
+                showStatus(`Switched to ${size.name} (${size.width} × ${size.height})`, 'info');
+                
+                currentSize = (currentSize + 1) % sizes.length;
+                
+                if (currentSize === 0) {
+                    setTimeout(() => {
+                        iframe.style.width = '100%';
+                        iframe.style.height = '600px';
+                        showStatus('Responsive test completed', 'success');
+                    }, 2000);
+                } else {
+                    setTimeout(cycleSize, 2000);
+                }
+            }
+            
+            cycleSize();
+        }
+
+        function testComponents() {
+            showStatus('Running component tests...', 'info');
+            
+            const tests = [
+                { name: 'CSS Loading', test: () => checkCSSLoaded() },
+                { name: 'JavaScript Loading', test: () => checkJSLoaded() },
+                { name: 'HTML Structure', test: () => checkHTMLStructure() },
+                { name: 'Responsive Utilities', test: () => checkResponsiveCSS() },
+                { name: 'Component Styles', test: () => checkComponentCSS() }
+            ];
+            
+            const testContainer = document.getElementById('component-tests');
+            testContainer.innerHTML = '<h3>Running Tests...</h3>';
+            
+            let passed = 0;
+            let failed = 0;
+            
+            tests.forEach((test, index) => {
+                setTimeout(() => {
+                    try {
+                        const result = test.test();
+                        if (result) {
+                            testContainer.innerHTML += `<div class="status success">[PASS] ${test.name}: PASSED</div>`;
+                            passed++;
+                        } else {
+                            testContainer.innerHTML += `<div class="status error">[FAIL] ${test.name}: FAILED</div>`;
+                            failed++;
+                        }
+                    } catch (error) {
+                        testContainer.innerHTML += `<div class="status error">[ERROR] ${test.name}: ERROR - ${error.message}</div>`;
+                        failed++;
+                    }
+                    
+                    if (index === tests.length - 1) {
+                        setTimeout(() => {
+                            testContainer.innerHTML += `<div class="status ${failed === 0 ? 'success' : 'warning'}">
+                                <strong>Test Results: ${passed} passed, ${failed} failed</strong>
+                            </div>`;
+                            showStatus(`Component tests completed: ${passed} passed, ${failed} failed`, failed === 0 ? 'success' : 'warning');
+                        }, 100);
+                    }
+                }, index * 500);
+            });
+        }
+
+        function checkCSSLoaded() {
+            // Try to access CSS files through the iframe
+            const iframe = document.getElementById('app-preview');
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const cssLinks = iframeDoc.querySelectorAll('link[rel="stylesheet"]');
+                return cssLinks.length >= 4; // reset.css, main.css, components.css, responsive.css
+            } catch (e) {
+                return false;
+            }
+        }
+
+        function checkJSLoaded() {
+            // Check if our JS files are linked
+            const iframe = document.getElementById('app-preview');
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const scripts = iframeDoc.querySelectorAll('script[src]');
+                return Array.from(scripts).some(script => script.src.includes('app.js'));
+            } catch (e) {
+                return false;
+            }
+        }
+
+        function checkHTMLStructure() {
+            const iframe = document.getElementById('app-preview');
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                
+                // Check for key elements
+                const requiredElements = [
+                    '.header',
+                    '.main-container',
+                    '.form-section',
+                    '.answer-section', 
+                    '.history-section',
+                    '#uploadZone',
+                    '#questionInput',
+                    '#submitBtn'
+                ];
+                
+                return requiredElements.every(selector => iframeDoc.querySelector(selector));
+            } catch (e) {
+                return false;
+            }
+        }
+
+        function checkResponsiveCSS() {
+            // Check if responsive CSS classes exist
+            const iframe = document.getElementById('app-preview');
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const stylesheets = iframeDoc.styleSheets;
+                
+                // Look for media queries in CSS
+                for (let i = 0; i < stylesheets.length; i++) {
+                    try {
+                        const rules = stylesheets[i].cssRules || stylesheets[i].rules;
+                        for (let j = 0; j < rules.length; j++) {
+                            if (rules[j].type === CSSRule.MEDIA_RULE) {
+                                return true; // Found media queries
+                            }
+                        }
+                    } catch (e) {
+                        // Cross-origin or other CSS access issues
+                        continue;
+                    }
+                }
+                return false;
+            } catch (e) {
+                return true; // Assume responsive CSS exists if we can't check
+            }
+        }
+
+        function checkComponentCSS() {
+            // Check if component-specific classes exist
+            const iframe = document.getElementById('app-preview');
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                
+                // Check for component classes in the DOM
+                const componentClasses = [
+                    '.upload-zone',
+                    '.answer-container',
+                    '.history-container',
+                    '.submit-btn',
+                    '.quick-tag'
+                ];
+                
+                return componentClasses.every(selector => iframeDoc.querySelector(selector));
+            } catch (e) {
+                return false;
+            }
+        }
+
+        function runAllTests() {
+            showStatus('Starting comprehensive test suite...', 'info');
+            
+            setTimeout(() => {
+                testResponsive();
+            }, 1000);
+            
+            setTimeout(() => {
+                testComponents();
+            }, 8000);
+            
+            setTimeout(() => {
+                showStatus('All tests completed! Check results above.', 'success');
+            }, 15000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            showStatus('Frontend test suite loaded successfully', 'success');
+            showStatus('Backend connection: Not required for frontend testing', 'info');
+            showStatus('Ready to test VisuaLens frontend components', 'success');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+# VisuaLens - Visual Q&A System Requirements
+
+# Core Web Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# Image Processing
+Pillow==10.1.0
+opencv-python-headless==4.8.1.78
+
+# Ollama Client
+requests==2.31.0
+httpx==0.25.2
+
+# Data Models & Validation
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# File Handling
+python-multipart==0.0.6
+aiofiles==23.2.1
+
+# Logging & Utilities
+loguru==0.7.2
+python-dotenv==1.0.0
+
+# Development & Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+black==23.11.0
+flake8==6.1.0
+
+# Optional: Enhanced image processing
+# scikit-image==0.22.0
+# numpy==1.24.3
+
+# CORS and Security
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4

@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "standard": {
+      "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+      "datefmt": "%Y-%m-%d %H:%M:%S"
+    },
+    "detailed": {
+      "format": "%(asctime)s [%(levelname)s] %(name)s:%(lineno)d - %(funcName)s(): %(message)s",
+      "datefmt": "%Y-%m-%d %H:%M:%S"
+    },
+    "json": {
+      "format": "%(asctime)s %(levelname)s %(name)s %(message)s",
+      "datefmt": "%Y-%m-%d %H:%M:%S"
+    }
+  },
+  "handlers": {
+    "console": {
+      "class": "logging.StreamHandler",
+      "level": "INFO",
+      "formatter": "standard",
+      "stream": "ext://sys.stdout"
+    },
+    "file": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "level": "DEBUG",
+      "formatter": "detailed",
+      "filename": "logs/visualens.log",
+      "maxBytes": 10485760,
+      "backupCount": 5
+    },
+    "error_file": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "level": "ERROR",
+      "formatter": "detailed",
+      "filename": "logs/errors.log",
+      "maxBytes": 10485760,
+      "backupCount": 3
+    }
+  },
+  "loggers": {
+    "visualens": {
+      "level": "DEBUG",
+      "handlers": ["console", "file"],
+      "propagate": false
+    },
+    "visualens.ollama": {
+      "level": "DEBUG",
+      "handlers": ["console", "file"],
+      "propagate": false
+    },
+    "visualens.api": {
+      "level": "INFO",
+      "handlers": ["console", "file"],
+      "propagate": false
+    },
+    "visualens.processing": {
+      "level": "DEBUG",
+      "handlers": ["console", "file"],
+      "propagate": false
+    },
+    "uvicorn": {
+      "level": "INFO",
+      "handlers": ["console"],
+      "propagate": false
+    },
+    "fastapi": {
+      "level": "INFO",
+      "handlers": ["console"],
+      "propagate": false
+    }
+  },
+  "root": {
+    "level": "INFO",
+    "handlers": ["console", "error_file"]
+  }
+}

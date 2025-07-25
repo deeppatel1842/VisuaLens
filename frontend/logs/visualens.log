@@ -1,0 +1,12 @@
+2025-07-25 15:10:08 | INFO | src.api.main:lifespan:80 - Initializing Ollama client...
+2025-07-25 15:10:08 | INFO | src.utils.ollama_client:__init__:56 - Initialized OllamaVisionClient with model: llava:13b
+2025-07-25 15:10:08 | INFO | src.utils.ollama_client:health_check:71 - Ollama server healthy - Version: 0.9.6
+2025-07-25 15:10:08 | INFO | src.api.main:lifespan:84 - Initializing Q&A engine...
+2025-07-25 15:10:08 | INFO | src.processing.qa_engine:__init__:242 - Initialized VisionQAEngine
+2025-07-25 15:10:08 | INFO | src.api.main:lifespan:87 - ✅ Application startup completed successfully
+2025-07-25 15:11:00 | INFO | src.utils.ollama_client:health_check:71 - Ollama server healthy - Version: 0.9.6
+2025-07-25 15:11:01 | INFO | src.utils.ollama_client:list_models:107 - Found 3 available models
+2025-07-25 15:11:10 | INFO | src.utils.ollama_client:health_check:71 - Ollama server healthy - Version: 0.9.6
+2025-07-25 15:11:10 | INFO | src.utils.ollama_client:list_models:107 - Found 3 available models
+2025-07-25 15:11:19 | INFO | src.utils.ollama_client:health_check:71 - Ollama server healthy - Version: 0.9.6
+2025-07-25 15:11:19 | INFO | src.utils.ollama_client:list_models:107 - Found 3 available models

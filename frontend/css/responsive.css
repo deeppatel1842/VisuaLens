@@ -1,0 +1,621 @@
+/* Responsive design utilities and media queries for VisuaLens */
+
+/* Breakpoint variables */
+:root {
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+}
+
+/* Container queries for modern browsers */
+@container (max-width: 767px) {
+    .upload-zone {
+        padding: var(--space-4);
+    }
+    
+    .upload-icon {
+        font-size: 2rem;
+    }
+    
+    .upload-text {
+        font-size: var(--font-size-base);
+    }
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 767px) {
+    /* Layout adjustments */
+    .main-container {
+        flex-direction: column;
+        gap: var(--space-4);
+        padding: var(--space-2);
+    }
+    
+    .form-section,
+    .answer-section,
+    .history-section {
+        flex: none;
+        width: 100%;
+    }
+    
+    .form-section {
+        order: 1;
+    }
+    
+    .answer-section {
+        order: 2;
+    }
+    
+    .history-section {
+        order: 3;
+        max-height: 300px;
+    }
+    
+    /* Header adjustments */
+    .header {
+        padding: var(--space-2) 0;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-2);
+    }
+    
+    .logo {
+        font-size: var(--font-size-xl);
+    }
+    
+    .header-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* Form adjustments */
+    .form-group {
+        margin-bottom: var(--space-3);
+    }
+    
+    .question-input {
+        min-height: 80px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .quick-question-tags {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .quick-tag {
+        text-align: center;
+        padding: var(--space-2) var(--space-3);
+    }
+    
+    .advanced-options {
+        margin: var(--space-2) 0;
+    }
+    
+    .submit-btn {
+        padding: var(--space-3);
+        font-size: var(--font-size-base);
+        position: sticky;
+        bottom: var(--space-2);
+        z-index: var(--z-sticky);
+    }
+    
+    /* Image preview adjustments */
+    .image-preview img {
+        height: 150px;
+    }
+    
+    /* Answer section adjustments */
+    .answer-container {
+        min-height: 150px;
+    }
+    
+    .answer-placeholder {
+        padding: var(--space-4);
+        min-height: 150px;
+    }
+    
+    .placeholder-icon {
+        font-size: 2rem;
+    }
+    
+    .answer-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-2);
+    }
+    
+    .answer-meta {
+        flex-wrap: wrap;
+        gap: var(--space-2);
+    }
+    
+    .answer-actions {
+        align-self: stretch;
+        justify-content: space-between;
+    }
+    
+    .answer-text {
+        padding: var(--space-3);
+        font-size: var(--font-size-sm);
+    }
+    
+    .answer-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-2);
+    }
+    
+    /* History adjustments */
+    .history-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-2);
+    }
+    
+    .history-controls {
+        justify-content: space-between;
+    }
+    
+    .history-container {
+        max-height: 250px;
+    }
+    
+    .history-item {
+        padding: var(--space-2);
+    }
+    
+    .history-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-1);
+    }
+    
+    /* Footer adjustments */
+    .footer-content {
+        flex-direction: column;
+        gap: var(--space-2);
+        text-align: center;
+    }
+    
+    .footer-links {
+        justify-content: center;
+    }
+    
+    /* Notification adjustments */
+    .notification-container {
+        top: var(--space-2);
+        right: var(--space-2);
+        left: var(--space-2);
+        max-width: none;
+    }
+    
+    .notification {
+        padding: var(--space-3);
+    }
+    
+    /* Modal adjustments */
+    .modal-overlay {
+        padding: var(--space-2);
+    }
+    
+    .modal {
+        max-height: 90vh;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: var(--space-3);
+    }
+    
+    /* Utility classes for mobile */
+    .mobile-hidden {
+        display: none;
+    }
+    
+    .mobile-stack {
+        flex-direction: column;
+    }
+    
+    .mobile-full-width {
+        width: 100%;
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .main-container {
+        gap: var(--space-5);
+        padding: var(--space-3);
+    }
+    
+    .form-section,
+    .answer-section {
+        flex: 1;
+    }
+    
+    .history-section {
+        flex: 0 0 280px;
+    }
+    
+    .answer-container {
+        min-height: 250px;
+    }
+    
+    .history-container {
+        max-height: 350px;
+    }
+    
+    /* Tablet utility classes */
+    .tablet-hidden {
+        display: none;
+    }
+    
+    .tablet-stack {
+        flex-direction: column;
+    }
+}
+
+/* Desktop adjustments */
+@media (min-width: 1024px) {
+    .main-container {
+        gap: var(--space-6);
+        padding: var(--space-4);
+    }
+    
+    .form-section {
+        flex: 0 0 350px;
+    }
+    
+    .answer-section {
+        flex: 1;
+        min-width: 0; /* Prevents flex overflow */
+    }
+    
+    .history-section {
+        flex: 0 0 320px;
+    }
+    
+    .answer-container {
+        min-height: 300px;
+    }
+    
+    .history-container {
+        max-height: 500px;
+    }
+    
+    /* Enhanced hover effects for desktop */
+    .upload-zone:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+    
+    .quick-tag:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .history-item:hover {
+        transform: translateY(-1px);
+    }
+    
+    /* Desktop utility classes */
+    .desktop-hidden {
+        display: none;
+    }
+    
+    .desktop-inline {
+        display: inline;
+    }
+    
+    .desktop-flex {
+        display: flex;
+    }
+}
+
+/* Large desktop adjustments */
+@media (min-width: 1280px) {
+    .container {
+        max-width: 1200px;
+    }
+    
+    .main-container {
+        gap: var(--space-8);
+    }
+    
+    .form-section {
+        flex: 0 0 380px;
+    }
+    
+    .history-section {
+        flex: 0 0 360px;
+    }
+    
+    .answer-container {
+        min-height: 400px;
+    }
+}
+
+/* Ultra-wide display adjustments */
+@media (min-width: 1536px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .main-container {
+        gap: var(--space-10);
+    }
+    
+    .form-section {
+        flex: 0 0 420px;
+    }
+    
+    .history-section {
+        flex: 0 0 400px;
+    }
+}
+
+/* High DPI display adjustments */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .upload-icon,
+    .placeholder-icon {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .answer-text {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Print styles */
+@media print {
+    .header-actions,
+    .submit-btn,
+    .history-section,
+    .footer,
+    .notification-container {
+        display: none !important;
+    }
+    
+    .main-container {
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+    
+    .answer-content {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+    
+    .answer-text {
+        color: #000;
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .upload-zone:hover,
+    .quick-tag:hover,
+    .history-item:hover,
+    .submit-btn:hover {
+        transform: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000;
+        --text-primary: #000;
+        --text-secondary: #333;
+        --text-muted: #666;
+        --primary-color: #0066cc;
+        --primary-hover: #0052a3;
+    }
+    
+    .upload-zone {
+        border-width: 3px;
+    }
+    
+    .answer-content,
+    .history-item {
+        border-width: 2px;
+    }
+    
+    .submit-btn {
+        border: 2px solid var(--primary-color);
+    }
+}
+
+/* Dark mode preferences */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --white: #1a1a1a;
+        --black: #ffffff;
+        --gray-50: #262626;
+        --gray-100: #2d2d2d;
+        --gray-200: #404040;
+        --gray-300: #525252;
+        --gray-400: #737373;
+        --gray-500: #a3a3a3;
+        --gray-600: #d4d4d4;
+        --gray-700: #e5e5e5;
+        --gray-800: #f5f5f5;
+        --gray-900: #ffffff;
+        
+        --bg-primary: #1a1a1a;
+        --bg-secondary: #262626;
+        --bg-accent: #2d2d2d;
+        
+        --text-primary: #ffffff;
+        --text-secondary: #e5e5e5;
+        --text-muted: #a3a3a3;
+        
+        --border-color: #404040;
+        --border-hover: #525252;
+        
+        --primary-light: rgba(59, 130, 246, 0.1);
+        
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .image-preview {
+        border: 1px solid var(--border-color);
+    }
+    
+    .upload-zone.dragover {
+        background: rgba(59, 130, 246, 0.2);
+    }
+}
+
+/* Focus management for accessibility */
+@media (any-hover: none) {
+    /* Touch devices - remove hover effects */
+    .upload-zone:hover,
+    .quick-tag:hover,
+    .submit-btn:hover,
+    .action-btn:hover,
+    .history-item:hover {
+        transform: none;
+        box-shadow: initial;
+    }
+}
+
+/* Container query support detection */
+@supports (container-type: inline-size) {
+    .main-container {
+        container-type: inline-size;
+    }
+    
+    @container (max-width: 600px) {
+        .form-section {
+            padding: var(--space-2);
+        }
+    }
+    
+    @container (min-width: 800px) {
+        .quick-question-tags {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--space-2);
+        }
+    }
+}
+
+/* Utility classes for responsive design */
+.responsive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+}
+
+.responsive-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.responsive-flex > * {
+    flex: 1;
+    min-width: 250px;
+}
+
+/* Aspect ratio utilities */
+.aspect-square {
+    aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+    aspect-ratio: 16 / 9;
+}
+
+.aspect-photo {
+    aspect-ratio: 4 / 3;
+}
+
+/* Responsive text utilities */
+.text-responsive {
+    font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-lg));
+}
+
+.heading-responsive {
+    font-size: clamp(var(--font-size-lg), 4vw, var(--font-size-2xl));
+}
+
+/* Responsive spacing utilities */
+.space-responsive {
+    margin: clamp(var(--space-2), 2vw, var(--space-6));
+}
+
+.padding-responsive {
+    padding: clamp(var(--space-2), 2vw, var(--space-6));
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 767px) {
+    /* Reduce shadows on mobile for performance */
+    .answer-content,
+    .history-item,
+    .notification {
+        box-shadow: var(--shadow-sm);
+    }
+    
+    /* Optimize animations for mobile */
+    .submit-btn,
+    .quick-tag,
+    .action-btn {
+        transition-duration: 0.15s;
+    }
+    
+    /* Optimize background attachments */
+    body {
+        background-attachment: scroll;
+    }
+}
+
+/* Landscape mobile adjustments */
+@media (max-width: 1023px) and (orientation: landscape) {
+    .main-container {
+        flex-direction: row;
+        overflow-x: auto;
+    }
+    
+    .form-section,
+    .answer-section,
+    .history-section {
+        flex-shrink: 0;
+        min-width: 280px;
+    }
+    
+    .answer-container {
+        min-height: 200px;
+    }
+    
+    .history-container {
+        max-height: 300px;
+    }
+}
